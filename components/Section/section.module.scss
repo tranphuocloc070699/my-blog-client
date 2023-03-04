@@ -1,0 +1,28 @@
+.wrapper {
+  margin: 0 12px;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+  h2 {
+    font-size: 1.6rem;
+    span {
+      margin-right: 6px;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: var(--blue-color-bold);
+    font-weight: 500;
+    font-size: 0.9rem;
+    &:hover {
+      text-decoration: underline;
+    }
+
+    span {
+      padding-left: 6px;
+    }
+  }
+}

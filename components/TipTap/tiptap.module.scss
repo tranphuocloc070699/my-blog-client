@@ -1,0 +1,30 @@
+.menuBar {
+  margin-top: 40px;
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  button {
+    background-color: white;
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    padding: 4px 8px;
+    cursor: pointer;
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    }
+  }
+}
+.isActived {
+  background-color: var(--blue-color-bold) !important;
+
+  color: white;
+}
+.editorContent {
+  border: 1px solid var(--border-color);
+
+  padding: 0 20px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}

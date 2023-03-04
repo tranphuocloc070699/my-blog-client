@@ -1,0 +1,9 @@
+.fragment {
+  margin-top: 40px;
+  &:first-child {
+    margin-top: 0px;
+  }
+}
+.listPost {
+  margin: 0 12px;
+}
