@@ -1,4 +1,4 @@
-import { useEditor, EditorContent, Editor } from '@tiptap/react';
+import { useEditor, EditorContent, Editor, ReactNodeViewRenderer } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 
 import { Color } from '@tiptap/extension-color';
@@ -10,11 +10,27 @@ import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
 import Bold from '@tiptap/extension-bold';
 import codeBlock from '@tiptap/extension-code-block';
+import Blockquote from '@tiptap/extension-blockquote';
 // Option 1: Browser + server-side
 import { generateHTML } from '@tiptap/html';
 import React, { useMemo, useState } from 'react';
 import clsx from 'clsx';
 import { BoldOutlined, ItalicOutlined, UnderlineOutlined } from '@ant-design/icons';
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
+import { lowlight } from 'lowlight';
+
+import css from 'highlight.js/lib/languages/css';
+import js from 'highlight.js/lib/languages/javascript';
+import ts from 'highlight.js/lib/languages/typescript';
+import html from 'highlight.js/lib/languages/xml';
+import CodeBlockComponent from './CodeBlockComponent';
+import DescriberComponent from './DescriberComponent';
+import TableOfContents from './TOC';
+
+lowlight.registerLanguage('html', html);
+lowlight.registerLanguage('css', css);
+lowlight.registerLanguage('js', js);
+lowlight.registerLanguage('ts', ts);
 
 const MenuBar = ({ editor }: any) => {
   if (!editor) {
@@ -64,6 +80,12 @@ const MenuBar = ({ editor }: any) => {
         className={clsx(styles.button, editor.isActive('paragraph') && styles.isActived)}
       >
         paragraph
+      </button>
+      <button
+        onClick={() => editor.chain().focus().setParagraph().run()}
+        className={clsx(styles.button, editor.isActive('paragraph') && styles.isActived)}
+      >
+        Describe code
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
@@ -155,6 +177,11 @@ const MenuBar = ({ editor }: any) => {
 };
 
 const TipTap = () => {
+  const CustomPharagraph = Paragraph.extend({
+    addNodeView() {
+      return ReactNodeViewRenderer(DescriberComponent);
+    },
+  });
   const editor = useEditor({
     extensions: [
       Color.configure({ types: [TextStyle.name, ListItem.name] }),
@@ -169,8 +196,24 @@ const TipTap = () => {
           keepAttributes: false,
         },
       }),
+
+      CodeBlockLowlight.extend({
+        addNodeView() {
+          return ReactNodeViewRenderer(CodeBlockComponent);
+        },
+      }).configure({ lowlight, defaultLanguage: 'javascript' }),
+      Blockquote.configure({
+        HTMLAttributes: {
+          class: styles.describer,
+        },
+      }),
+      TableOfContents,
     ],
-    content: '',
+
+    content: `
+        <toc></toc>
+        <p></p>
+      `,
   });
 
   const [content, setContent] = useState('');

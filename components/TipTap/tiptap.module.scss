@@ -27,4 +27,28 @@
   padding: 0 20px;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
+  p:active{
+    cursor: pointer;
+  }
+}
+
+// Code Block
+.codeBlock {
+  position: relative;
+  margin:0 12px;
+  select {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+  }
+}
+
+//Describe
+.describer{
+  border: 1px solid #dbdbdb;
+  margin: 0px 12px;
+  max-height: 200px;
+  overflow-y: scroll;
+  border-radius: 0.5rem;
+  padding:0 1rem;
 }

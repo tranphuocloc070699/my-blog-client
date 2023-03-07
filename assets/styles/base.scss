@@ -1,8 +1,9 @@
 @import 'normalize.css';
 @import '~/assets/styles/grid.scss';
+@import '~/assets/styles/tiptap.scss';
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
-:root {
+@import url('https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/github-dark.min.css');
+root {
   --text-color: #24335a;
   --gray-color: #8c8c8c;
   --background-color: #ffffff;
@@ -34,4 +35,52 @@ a {
 
 input {
   outline: none;
+}
+
+// TOC
+.toc {
+  position: fixed;
+  background: rgba(black, 0.1);
+  left: 0;
+  top: 0;
+  border-radius: 0.5rem;
+  opacity: 0.75;
+  padding: 0.75rem;
+
+  &__list {
+    list-style: none;
+    padding: 0;
+
+    &::before {
+      content: 'Table of Contents';
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.025rem;
+      opacity: 0.5;
+      text-transform: uppercase;
+    }
+  }
+
+  &__item {
+    a:hover {
+      opacity: 0.5;
+    }
+
+    &--3 {
+      padding-left: 1rem;
+    }
+
+    &--4 {
+      padding-left: 2rem;
+    }
+
+    &--5 {
+      padding-left: 3rem;
+    }
+
+    &--6 {
+      padding-left: 4rem;
+    }
+  }
 }
