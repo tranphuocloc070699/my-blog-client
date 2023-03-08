@@ -11,9 +11,11 @@ import Text from '@tiptap/extension-text';
 import Bold from '@tiptap/extension-bold';
 import codeBlock from '@tiptap/extension-code-block';
 import Blockquote from '@tiptap/extension-blockquote';
+import Heading from '@tiptap/extension-heading';
+import Image from '@tiptap/extension-image';
 // Option 1: Browser + server-side
 import { generateHTML } from '@tiptap/html';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import { BoldOutlined, ItalicOutlined, UnderlineOutlined } from '@ant-design/icons';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
@@ -32,7 +34,7 @@ lowlight.registerLanguage('css', css);
 lowlight.registerLanguage('js', js);
 lowlight.registerLanguage('ts', ts);
 
-const MenuBar = ({ editor }: any) => {
+const MenuBar = ({ editor }: any, { addImage }: any) => {
   if (!editor) {
     return null;
   }
@@ -172,20 +174,42 @@ const MenuBar = ({ editor }: any) => {
       >
         purple
       </button>
+      <button
+        onClick={() => {
+          // editor
+          //   .chain()
+          //   .focus()
+          //   .setImage({
+          //     src: 'https://i.pinimg.com/474x/30/9a/70/309a70ec4c7f20cdc5bba96441d409ea.jpg',
+          //   })
+          //   .run();
+
+          editor.commands.insertContent({
+            type: 'image',
+            attrs: {
+              src: 'https://i.pinimg.com/474x/30/9a/70/309a70ec4c7f20cdc5bba96441d409ea.jpg',
+              alt: 'Image',
+              title: 'Image',
+            },
+          });
+        }}
+      >
+        add image
+      </button>
     </div>
   );
 };
 
 const TipTap = () => {
-  const CustomPharagraph = Paragraph.extend({
-    addNodeView() {
-      return ReactNodeViewRenderer(DescriberComponent);
-    },
-  });
   const editor = useEditor({
     extensions: [
       Color.configure({ types: [TextStyle.name, ListItem.name] }),
       TextStyle.configure({ types: [ListItem.name] } as any),
+      Image.configure({
+        HTMLAttributes: {
+          class: styles.tiptapImage,
+        },
+      }),
       StarterKit.configure({
         bulletList: {
           keepMarks: true,
@@ -212,7 +236,8 @@ const TipTap = () => {
 
     content: `
         <toc></toc>
-        <p></p>
+        <p>Hdllo</p>
+        
       `,
   });
 
@@ -225,7 +250,11 @@ const TipTap = () => {
       Text,
       Bold,
       codeBlock,
+      TableOfContents,
+      Heading,
+      Image,
     ]);
+    console.log(editor?.getJSON());
     setContent(contentUpdated);
   };
 

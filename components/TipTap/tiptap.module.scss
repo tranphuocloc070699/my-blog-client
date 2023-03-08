@@ -27,7 +27,7 @@
   padding: 0 20px;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
-  p:active{
+  p:active {
     cursor: pointer;
   }
 }
@@ -35,7 +35,7 @@
 // Code Block
 .codeBlock {
   position: relative;
-  margin:0 12px;
+  margin: 0 12px;
   select {
     position: absolute;
     right: 0.5rem;
@@ -44,11 +44,19 @@
 }
 
 //Describe
-.describer{
+.describer {
   border: 1px solid #dbdbdb;
   margin: 0px 12px;
   max-height: 200px;
   overflow-y: scroll;
   border-radius: 0.5rem;
-  padding:0 1rem;
+  padding: 0 1rem;
+}
+
+// Image
+
+.tiptapImage {
+  border-radius: 0.5rem;
+  margin: 12px 0;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }

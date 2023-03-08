@@ -1,7 +1,7 @@
 import { NodeViewWrapper } from '@tiptap/react';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 
-export default ({ editor }: any) => {
+const TOCComponent = ({ editor }: any) => {
   const [items, setItems] = useState([]);
   console.log('TOC');
   const handleUpdate = useCallback(() => {
@@ -60,3 +60,5 @@ export default ({ editor }: any) => {
     </NodeViewWrapper>
   );
 };
+
+export default memo(TOCComponent);

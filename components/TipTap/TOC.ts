@@ -3,7 +3,6 @@ import { ReactNodeViewRenderer } from '@tiptap/react';
 
 import Component from './TOCComponent';
 
-console.log('TOC file');
 export default Node.create({
   name: 'tableOfContents',
 

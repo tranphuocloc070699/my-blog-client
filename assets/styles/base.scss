@@ -10,6 +10,9 @@ root {
   --blue-color-bold: #0168ff;
   --border-color: #d8d8d8;
 }
+html {
+  scroll-behavior: smooth;
+}
 * {
   //for gird
   box-sizing: border-box;
